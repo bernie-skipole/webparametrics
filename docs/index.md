@@ -26,7 +26,7 @@ webparametrics.com
 
 webparametrics.co.uk
 
-VPS from www.ovh.co.uk
+The VPS is from www.ovh.co.uk
 
 Ubuntu 20.04 Server (64-bit version)
 
@@ -231,6 +231,37 @@ On the VPS, copy static html files from the webparametrics repository
 and place these under /var/www/html, owned by root
 
 These should now be available by the web.
+
+
+## Add project skitest
+
+On the VPS, as user bernard.
+
+lxc launch ubuntu:20.04 skitest
+
+lxc list
+
+This gives container ip address 10.105.192.227
+
+lxc exec skitest -- /bin/bash
+
+apt-get update
+
+apt-get upgrade
+
+And to setup the container, follow repository skitest
+
+and as root on the VPS, add the following location to the nginx configuration
+/etc/nginx/sites-available/default
+
+     location /test {
+     proxy_pass http://10.105.192.227:8000;
+     }
+
+This should be in the server block which listens on port 443
+
+Restart nginx with command "service nginx restart"
+
 
 
 
