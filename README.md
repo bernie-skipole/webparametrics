@@ -10,11 +10,11 @@ Removing a project is just reversing the above steps.
 
 The VPS therefore needs to be configured with LXD, nginx, and certificates to serve https.
 
-It needs ssh capability to allow myself remote access - via keys rather than passwords.
+It needs ssh capability to allow remote access - via keys rather than passwords.
 
-An MQTT broker service is required on the VPS, listenning on the briged LXD network, as my projects are likely to communicate via an mqtt broker.
+An MQTT broker service is required on the VPS, listenning on the briged LXD network, as projects are likely to communicate via an mqtt broker.
 
-Include git capability, so my projects on github can be easily cloned on the VPS.
+Include git capability, so projects on github can be easily cloned on the VPS.
 
 The resultant service can be viewed at
 

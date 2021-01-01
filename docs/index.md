@@ -1,4 +1,4 @@
-Server build documentation
+# Server build documentation
 
 This documents a Virtual Private Server holding several test projects and builds. It will consist of a static web site, served via nginx, and hold a number of LXD containers. Each container will be a separate project. If these projects serve html, the VPS static web site will link to directories serving the project html.
 
@@ -10,11 +10,11 @@ Removing a project is just reversing the above steps.
 
 The VPS therefore needs to be configured with LXD, nginx, and certificates to serve https.
 
-It needs ssh capability to allow myself remote access - via keys rather than passwords.
+It needs ssh capability to allow remote access - via keys rather than passwords.
 
-An MQTT broker service is required on the VPS, listenning on the briged LXD network, as my projects are likely to communicate via an mqtt broker.
+An MQTT broker service is required on the VPS, listenning on the briged LXD network, as projects are likely to communicate via an mqtt broker.
 
-Include git capability, so my projects on github can be easily cloned on the VPS.
+Include git capability, so projects on github can be easily cloned on the VPS.
 
 The resultant service can be viewed at
 
@@ -40,7 +40,7 @@ Manage at:
 https://www.ovh.com/manager
 
 
-step 1 update the VPS
+## Update the VPS
 
 From the ovh kvm console, log in as root
 
@@ -50,12 +50,16 @@ apt-get upgrade
 and reboot
 
 
-step 2 add user bernard, as root on the VPS
+## Add user bernard
+
+As root on the VPS
 
 adduser bernard
 
 
-Step 3 From laptop, and any other PC you want, copy SSH keys
+## From laptop, and any other PC you want, copy SSH keys
+
+From laptop, desktop etc.,
 
 ssh-copy-id bernard@51.89.150.251
 
@@ -66,13 +70,13 @@ ssh bernard@51.89.150.251
 or even just
 ssh 51.89.150.251
 
-Step 4 Remove password login and root login
+## Remove password login and root login via ssh
 
 On the VPS as root:
 
 /etc/ssh/sshd_config copied to sshd_config.original
 
-in sshd_config ro
+in sshd_config edit the following
 
 Set the line:
 PasswordAuthentication yes
@@ -88,7 +92,7 @@ Followed by
 systemctl restart ssh.service
 
 
-Step 5, install iptraf-ng
+## Install iptraf-ng
 
 As root on the VPS:
 
@@ -97,7 +101,7 @@ apt-get install iptraf-ng
 The command "iptraf-ng" starts a console traffic monitor
 
 
-Step 6, install nginx
+## Install nginx
 
 apt-get install nginx
 
@@ -112,7 +116,7 @@ at /var/www/html which contains the file index.nginx-debian.html which is
 the nginx welcome screen. Use a browser to check this is served
 
 
-Step 7, setup lxd on the VPS
+## Setup lxd on the VPS
 
 usermod --append --groups lxd bernard
 
@@ -133,11 +137,11 @@ IPv4 address for lxdbr0: 10.105.192.1
 IPv6 address for lxdbr0: fd42:ad1d:ba59:dd49::1
 
 
-Step 8, set up container acremscope-db
+## Set up container acremscope-db
 
-This is the first of my projects, a container serving a database for my Astronomy Centre Remscope. At this moment it is only created to test LXD, the container itself will be populated later.
+This is the first project, a container serving a database for The Astronomy Centre Remscope. At this moment it is only created to test LXD, the container itself will be populated later.
 
-Note 20.04 is a long tem support distribution, so:
+Note Ubuntu 20.04 is a long tem support distribution, so:
 
 lxc launch ubuntu:20.04 acremscope-db
 
@@ -154,7 +158,7 @@ apt-get upgrade
 And to setup the container to serve a database, follow repository acremscope-db docs
 
 
-Step 9, Getting certificate from letsencrypt
+## Getting certificate from letsencrypt
 
 Back on the VPS, as root, following instructions at letsencrypt and https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
 
@@ -168,29 +172,6 @@ ln -s /snap/bin/certbot /usr/bin/certbot
 
 certbot --nginx  -d webparametrics.co.uk -d www.webparametrics.co.uk -d webparametrics.com -d www.webparametrics.com
 
-###
-
-Congratulations! You have successfully enabled https://webparametrics.co.uk,
-https://www.webparametrics.co.uk, https://webparametrics.com, and
-https://www.webparametrics.com
-
-
-IMPORTANT NOTES:
- - Congratulations! Your certificate and chain have been saved at:
-   /etc/letsencrypt/live/webparametrics.co.uk/fullchain.pem
-   Your key file has been saved at:
-   /etc/letsencrypt/live/webparametrics.co.uk/privkey.pem
-   Your cert will expire on 2021-03-31. To obtain a new or tweaked
-   version of this certificate in the future, simply run certbot again
-   with the "certonly" option. To non-interactively renew *all* of
-   your certificates, run "certbot renew"
- - If you like Certbot, please consider supporting our work by:
-
-   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
-   Donating to EFF:                    https://eff.org/donate-le
-
-###
-
 Try connecting with browser, should get https ok to the domains.
 
 Test automatic renewal
@@ -202,7 +183,7 @@ Also to see the certbot auto renewal timer, look at
 systemctl list-timers
 
 
-Step 10, Create a mosquitto broker listenning on the bridge port
+## Create a mosquitto broker listenning on the bridge port
 
 apt-get install mosquitto
 
@@ -218,13 +199,11 @@ systemctl restart mosquitto
 
 
 
-step 11, install git, and clone repositories
+## Install git, and clone repositories
 
 Note: git was found to be already installed on the ubuntu server, but local ssh public key needs copying to git
 
-create ssh key
-
-On the VPS, as user bernard
+On the VPS, as user bernard, create an ssh key
 
 ssh-keygen -t rsa -b 4096 -C "bernie@skipole.co.uk"
 
@@ -236,7 +215,7 @@ git clone git@github.com:bernie-skipole/webparametrics.git
 
 
 
-step 12, place static files under /var/www/html
+## Place static files under /var/www/html
 
 On the VPS, copy static html files from the webparametrics repository
 and place these under /var/www/html, owned by root
