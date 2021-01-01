@@ -1,10 +1,10 @@
 # Server build documentation
 
-This documents a Virtual Private Server holding several test projects and builds. It will consist of a static web site, served via nginx, and hold a number of LXD containers. Each container will be a separate project. If these projects serve html, the VPS static web site will link to directories serving the project html.
+This documents a Virtual Private Server holding several test projects and builds. It will consist of a simple static web menu, served via nginx, and hold a number of LXD containers. Each container will be a separate project. If these projects serve html, the web menu will display links to directories serving each project.
 
-The nginx configuration will act as a reverse proxy, forwarding calls to those directories which link to the appropriate lxd containers.
+The nginx configuration will act as a reverse proxy, forwarding calls to the appropriate lxd containers.
 
-Therefore creating a new project is simple: create an lxd container and populate with the project. Alter the VPS host static html to link to the container. Add a proxy location to the nginx configuration.
+Therefore creating a new project is simple: create an lxd container and populate with the project. Alter the VPS host web menu to link to a directory. Add a proxy location in the nginx configuration which forwards calls to this directory to the container.
 
 Removing a project is just reversing the above steps.
 
@@ -12,7 +12,7 @@ The VPS therefore needs to be configured with LXD, nginx, and certificates to se
 
 It needs ssh capability to allow remote access - via keys rather than passwords.
 
-An MQTT broker service is required on the VPS, listenning on the briged LXD network, as projects are likely to communicate via an mqtt broker.
+An MQTT broker service is required on the VPS, listenning on the bridged LXD network, as projects are likely to communicate via an mqtt broker.
 
 Include git capability, so projects on github can be easily cloned on the VPS.
 
@@ -26,7 +26,7 @@ webparametrics.com
 
 webparametrics.co.uk
 
-The VPS is from www.ovh.co.uk
+The VPS is from [www.ovh.co.uk](https://www.ovh.co.uk)
 
 Ubuntu 20.04 Server (64-bit version)
 
@@ -51,7 +51,7 @@ apt-get update
 
 apt-get upgrade
 
-and reboot
+and reboot if the upgrade requests it
 
 
 ## Add user bernard
@@ -59,6 +59,8 @@ and reboot
 As root on the VPS
 
 adduser bernard
+
+and record the password
 
 
 ## From laptop, and any other PC you want, copy SSH keys
@@ -110,7 +112,7 @@ As root on the VPS:
 
 apt-get install iptraf-ng
 
-The command "iptraf-ng" starts a console traffic monitor
+The command "iptraf-ng" starts a console traffic monitor. This can only be used by root, and is available for diagnostic purposes.
 
 
 ## Install nginx
@@ -128,9 +130,9 @@ under sites-available you will see 'default', this points to static files at /va
 
 ## Setup lxd on the VPS
 
-usermod --append --groups lxd bernard
+as root:
 
-bernard will need to log in and out
+usermod --append --groups lxd bernard
 
 lxd init
 
@@ -151,7 +153,7 @@ IPv6 address for lxdbr0: fd42:ad1d:ba59:dd49::1
 
 This is the first project, a container serving a database for The Astronomy Centre Remscope. At this moment it is only created to test LXD, the container itself will be populated later.
 
-Note Ubuntu 20.04 is a long tem support distribution, so:
+Note Ubuntu 20.04 is a long tem support distribution, so, as user bernard:
 
 lxc launch ubuntu:20.04 acremscope-db
 
@@ -165,7 +167,7 @@ apt-get update
 
 apt-get upgrade
 
-And to setup the container to serve a database, follow repository acremscope-db docs
+And to setup the container to serve a database, follow repository acremscope-db docs, but for now use crl-D to exit the container
 
 
 ## Getting certificate from letsencrypt
