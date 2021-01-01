@@ -18,26 +18,29 @@ Include git capability, so projects on github can be easily cloned on the VPS.
 
 The resultant service can be viewed at
 
-https://webparametrics.co.uk/
+[https://webparametrics.co.uk/](https://webparametrics.co.uk/)
 
 The VPS has domains
 
 webparametrics.com
+
 webparametrics.co.uk
 
 VPS from www.ovh.co.uk
 
 Ubuntu 20.04 Server (64-bit version)
+
 38Gbits
 
 IPv4 address is: 51.89.150.251
+
 IPv6 address is: 2001:41d0:0801:2000:0000:0000:0000:212c
 
 Name : vps806299.ovh.net
 
 Manage at:
 
-https://www.ovh.com/manager
+[https://www.ovh.com/manager](https://www.ovh.com/manager)
 
 
 ## Update the VPS
@@ -45,6 +48,7 @@ https://www.ovh.com/manager
 From the ovh kvm console, log in as root
 
 apt-get update
+
 apt-get upgrade
 
 and reboot
@@ -66,8 +70,11 @@ ssh-copy-id bernard@51.89.150.251
 This will ask for the user bernard password
 
 so now the following works from laptop
+
 ssh bernard@51.89.150.251
+
 or even just
+
 ssh 51.89.150.251
 
 ## Remove password login and root login via ssh
@@ -79,12 +86,17 @@ On the VPS as root:
 in sshd_config edit the following
 
 Set the line:
+
 PasswordAuthentication yes
+
 to
+
 PasswordAuthentication no
 
 PermitRootLogin yes
+
 to
+
 PermitRootLogin no
 
 Followed by
@@ -111,9 +123,7 @@ The server has two directories:
 
 /etc/nginx/sites-enabled
 
-under sites-available you will see 'default', this points to static files
-at /var/www/html which contains the file index.nginx-debian.html which is
-the nginx welcome screen. Use a browser to check this is served
+under sites-available you will see 'default', this points to static files at /var/www/html which contains the file index.nginx-debian.html which is the nginx welcome screen. Use a browser to check this is served
 
 
 ## Setup lxd on the VPS
