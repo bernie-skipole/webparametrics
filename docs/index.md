@@ -2,19 +2,23 @@ Server build documentation
 
 This documents a Virtual Private Server holding several test projects and builds. It will consist of a static web site, served via nginx, and hold a number of LXD containers. Each container will be a separate project. If these projects serve html, the VPS static web site will link to directories serving the project html.
 
-The nginx configuration will act as a reverse proxy, forwarding calls to those directories to the appropriate lxd containers.
+The nginx configuration will act as a reverse proxy, forwarding calls to those directories which link to the appropriate lxd containers.
 
-Therefore creating a new project is simple: create an lxd container and install the project. Alter the VPS host static html to link to the container. Add a proxy location to the nginx configuration.
+Therefore creating a new project is simple: create an lxd container and populate with the project. Alter the VPS host static html to link to the container. Add a proxy location to the nginx configuration.
 
 Removing a project is just reversing the above steps.
 
 The VPS therefore needs to be configured with LXD, nginx, and certificates to serve https.
 
-Further configuration: Add ssh capability to allow myself remote access - via keys rather than passwords.
+It needs ssh capability to allow myself remote access - via keys rather than passwords.
 
-Install an MQTT server on the VPS, listenning on the briged LXD network, as my projects are likely to communicate via an mqtt broker.
+An MQTT broker service is required on the VPS, listenning on the briged LXD network, as my projects are likely to communicate via an mqtt broker.
 
-Add git capability, so my projects on github can be easily cloned on the VPS.
+Include git capability, so my projects on github can be easily cloned on the VPS.
+
+The resultant service can be viewed at
+
+https://webparametrics.co.uk/
 
 The VPS has domains
 
