@@ -8,6 +8,8 @@ Therefore creating a new project is simple: create an lxd container and populate
 
 Removing a project is just reversing the above steps.
 
+![Schematic](webparametrics.png)
+
 The VPS therefore needs to be configured with LXD, nginx, and certificates to serve https.
 
 It needs ssh capability to allow remote access - via keys rather than passwords.
