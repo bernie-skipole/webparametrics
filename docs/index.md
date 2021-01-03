@@ -265,6 +265,36 @@ This should be in the server block which listens on port 443
 Restart nginx with command "service nginx restart"
 
 
+## Add project exercise
+
+On the VPS, as user bernard.
+
+lxc launch ubuntu:20.04 exercise
+
+lxc list
+
+This gives container ip address 10.105.192.40
+
+lxc exec exercise -- /bin/bash
+
+apt-get update
+
+apt-get upgrade
+
+And to setup the container, follow repository exercise
+
+and as root on the VPS, add the following location to the nginx configuration
+/etc/nginx/sites-available/default
+
+     location /exercise {
+     proxy_pass http://10.105.192.40:8000;
+     }
+
+This should be in the server block which listens on port 443
+
+Restart nginx with command "service nginx restart"
+
+
 
 
 
