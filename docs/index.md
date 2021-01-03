@@ -169,6 +169,8 @@ apt-get update
 
 apt-get upgrade
 
+apt-get install python3-pip
+
 And to setup the container to serve a database, follow repository acremscope-db docs, but for now use crl-D to exit the container
 
 
@@ -253,6 +255,8 @@ apt-get update
 
 apt-get upgrade
 
+apt-get install python3-pip
+
 And to setup the container, follow repository skitest
 
 and as root on the VPS, add the following location to the nginx configuration
@@ -282,6 +286,8 @@ lxc exec exercise -- /bin/bash
 apt-get update
 
 apt-get upgrade
+
+apt-get install python3-pip
 
 And to setup the container, follow repository exercise
 
