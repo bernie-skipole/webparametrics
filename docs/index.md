@@ -163,14 +163,6 @@ lxc list
 
 This gives container ip address 10.105.192.252
 
-lxc exec acremscope-db -- /bin/bash
-
-apt-get update
-
-apt-get upgrade
-
-apt-get install python3-pip
-
 And to setup the container to serve a database, follow repository acremscope-db docs, but for now use crl-D to exit the container
 
 
@@ -301,6 +293,41 @@ and as root on the VPS, add the following location to the nginx configuration
 This should be in the server block which listens on port 443
 
 Restart nginx with command "service nginx restart"
+
+
+## Continue with container acremscope-db
+
+On the VPS, as user bernard.
+
+lxc list
+
+Check container acremscope-db ip address 10.105.192.252
+
+lxc exec acremscope-db -- /bin/bash
+
+apt-get update
+
+apt-get upgrade
+
+apt-get install python3-pip
+
+And to setup the container, follow repository acremscope-db
+
+and as root on the VPS, add the following location to the nginx configuration
+/etc/nginx/sites-available/default
+
+     location /acremscope/backups {
+     proxy_pass http://10.105.192.252:8000;
+     }
+
+This should be in the server block which listens on port 443
+
+Note the folder is at /acremscope/backups - this web service allows a remote
+user to download database backup files, and will be a service within
+the /acremscope site.
+
+Restart nginx with command "service nginx restart"
+
 
 
 
