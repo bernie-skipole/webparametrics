@@ -295,6 +295,38 @@ This should be in the server block which listens on port 443
 Restart nginx with command "service nginx restart"
 
 
+## Add project acremscope
+
+On the VPS, as user bernard.
+
+lxc launch ubuntu:20.04 acremscope
+
+lxc list
+
+This gives container ip address 10.105.192.83
+
+lxc exec acremscope -- /bin/bash
+
+apt-get update
+
+apt-get upgrade
+
+apt-get install python3-pip
+
+And to setup the container, follow repository acremscope
+
+and as root on the VPS, add the following location to the nginx configuration
+/etc/nginx/sites-available/default
+
+     location /acremscope {
+     proxy_pass http://10.105.192.83:8000;
+     }
+
+This should be in the server block which listens on port 443
+
+Restart nginx with command "service nginx restart"
+
+
 ## Continue with container acremscope-db
 
 On the VPS, as user bernard.
