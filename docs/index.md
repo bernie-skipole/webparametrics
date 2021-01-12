@@ -191,7 +191,7 @@ Also to see the certbot auto renewal timer, look at
 systemctl list-timers
 
 
-## Create a mosquitto broker listenning on the bridge port
+## Create a mosquitto broker listening on the bridge port
 
 apt-get install mosquitto
 
