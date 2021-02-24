@@ -103,6 +103,12 @@ to
 
 PermitRootLogin no
 
+Also add the line
+
+GatewayPorts clientspecified
+
+which allows an ssh tunnel from a remote raspberry pi to the lxc network to be made
+
 Followed by
 
 systemctl restart ssh.service
@@ -191,7 +197,9 @@ Also to see the certbot auto renewal timer, look at
 systemctl list-timers
 
 
-## Create a mosquitto broker listenning on the bridge port
+<<<<<<< HEAD
+=======
+## Create a mosquitto broker listening on the bridge port
 
 apt-get install mosquitto
 
@@ -206,6 +214,7 @@ then
 systemctl restart mosquitto
 
 
+>>>>>>> b52ed5f00041008b1d1edd490a66476b84b95315
 
 ## Install git, and clone repositories
 
