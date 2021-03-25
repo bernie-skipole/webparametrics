@@ -197,28 +197,6 @@ Also to see the certbot auto renewal timer, look at
 systemctl list-timers
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b52ed5f00041008b1d1edd490a66476b84b95315
-## Create a mosquitto broker listening on the bridge port
-
-apt-get install mosquitto
-
-cd /etc/mosquitto/conf.d
-
-create file acremscope.conf, containing the line
-
-listener 1883 10.105.192.1
-
-then
-
-systemctl restart mosquitto
-
-
->>>>>>> b52ed5f00041008b1d1edd490a66476b84b95315
-
 ## Install git, and clone repositories
 
 Note: git was found to be already installed on the ubuntu server, but local ssh public key needs copying to git
