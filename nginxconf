@@ -53,11 +53,6 @@ server {
              proxy_pass http://10.105.192.83:8000;
      }
 
-     location /acremscope/backups {
-             # forwards to the acremscope-db container
-             proxy_pass http://10.105.192.252:8000;
-     }
-
     listen [::]:443 ssl ipv6only=on; # managed by Certbot
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/webparametrics.co.uk/fullchain.pem; # managed by Certbot
