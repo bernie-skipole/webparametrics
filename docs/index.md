@@ -156,32 +156,9 @@ IPv4 address for lxdbr0: 10.105.192.1
 IPv6 address for lxdbr0: fd42:ad1d:ba59:dd49::1
 
 
-## Set up container acremscope-db
-
-This is the first project, a container serving a database for The Astronomy Centre Remscope.
-
-Note Ubuntu 20.04 is a long tem support distribution, so, as user bernard:
-
-lxc launch ubuntu:20.04 acremscope-db
-
-lxc list
-
-This gives container ip address 10.105.192.252
-
-lxc exec acremscope-db -- /bin/bash
-
-apt-get update
-
-apt-get upgrade
-
-apt-get install python3-pip
-
-And to setup the container to serve a database, follow repository acremscope-db docs, but for now use crl-D to exit the container
-
-
 ## Getting certificate from letsencrypt
 
-Back on the VPS, as root, following instructions at letsencrypt and https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
+As root, following instructions at letsencrypt and https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
 
 snap install core; snap refresh core
 
