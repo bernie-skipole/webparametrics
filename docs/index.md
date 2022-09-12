@@ -204,18 +204,17 @@ and place these under /var/www/html, owned by root
 
 These should now be available by the web.
 
-
-## Add project skitest
+## Add project skiwidgets
 
 On the VPS, as user bernard.
 
-lxc launch ubuntu:20.04 skitest
+lxc launch ubuntu:20.04 skiwidgets
 
 lxc list
 
-This gives container ip address 10.105.192.227
+This gives container ip address 10.105.192.130
 
-lxc exec skitest -- /bin/bash
+lxc exec skiwidgets -- /bin/bash
 
 apt-get update
 
@@ -228,8 +227,8 @@ And to setup the container, follow repository skitest
 and as root on the VPS, add the following location to the nginx configuration
 /etc/nginx/sites-available/default
 
-     location /test {
-     proxy_pass http://10.105.192.227:8000;
+     location /skiwidgets {
+     proxy_pass http://10.105.192.130:8000;
      }
 
 This should be in the server block which listens on port 443

@@ -35,11 +35,11 @@ server {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
 		try_files $uri $uri/ =404;
-	}
+     }
 
-     location /test {
-             # forwards to the skitest container
-             proxy_pass http://10.105.192.227:8000;
+     location /skiwidgets {
+             # forwards to the skiwidgets container
+             proxy_pass http://10.105.192.130:8000;
      }
 
      location /exercise {
