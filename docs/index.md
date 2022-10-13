@@ -222,7 +222,7 @@ apt-get upgrade
 
 apt-get install python3-pip
 
-And to setup the container, follow repository skitest
+And to setup the container, follow repository skiwidgets
 
 and as root on the VPS, add the following location to the nginx configuration
 /etc/nginx/sites-available/default
